@@ -1,7 +1,7 @@
 ## Lazy Memorandum
 
-Lazy Memorandum, a simple memorandum
-![Version](https://img.shields.io/badge/Version-1.0.4-brightgreen.svg)
+Lazy Memorandum, a simple memorandum.<br/>
+![Version](https://img.shields.io/badge/Version-1.0.4-brightgreen.svg)<br/>
 ![License](https://img.shields.io/badge/License-GPLv3.0-blue)
 
 ## Update Log
