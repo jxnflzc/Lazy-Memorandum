@@ -3,23 +3,34 @@ package per.jxnflzc.memorandumkotlin.activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.google.gson.JsonParser
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.*
+import org.json.JSONObject
 import org.litepal.LitePal
 import per.jxnflzc.memorandumkotlin.ActivityCollector
+import per.jxnflzc.memorandumkotlin.BuildConfig
 import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.activity.menu.AboutActivity
 import per.jxnflzc.memorandumkotlin.activity.menu.UpdateActivity
 import per.jxnflzc.memorandumkotlin.adapter.MemorandumAdapter
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private var memorandumList = ArrayList<Memorandum>()

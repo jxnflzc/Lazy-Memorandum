@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="per.jxnflzc.memorandumkotlin">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MemorandumKotlinApplication"
         android:allowBackup="true"
