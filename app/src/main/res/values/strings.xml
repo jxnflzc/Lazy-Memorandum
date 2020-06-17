@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">懒人备忘录</string>
+    <string name="app_desc">懒人备忘录，一款简单的备忘录。</string>
+    <string name="connect_with_me">与我联系</string>
+    <string name="help">帮助</string>
+    <string name="about">关于</string>
+    <string name="test">测试</string>
+    <string name="titleHint">请输入标题</string>
+    <string name="title">标题</string>
+    <string name="contentHint">请输入内容</string>
+    <string name="content">内容</string>
+    <string name="search">搜索</string>
+    <string name="ok">确认</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="saveSuccessful">保存成功</string>
+    <string name="saveFailed">保存失败</string>
+    <string name="delete">删除</string>
+    <string name="deleteSuccessful">删除成功</string>
+    <string name="deleteFailed">删除失败</string>
+    <string name="change">修改</string>
+    <string name="changeSuccessful">修改成功</string>
+    <string name="changeFailed">修改失败</string>
+    <string name="validateTitleFailed">标题不能为空</string>
+    <string name="validateContentFailed">内容不能为空</string>
+    <string name="update_log">更新日志</string>
+    <string name="close">关闭</string>
+    <string name="app_info">应用信息</string>
+    <string name="delete_confirm">确认删除该笔记吗？</string>
+    <string name="more_than_words">字数超过$d</string>
+</resources>

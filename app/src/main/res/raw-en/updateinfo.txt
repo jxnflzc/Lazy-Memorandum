@@ -1,0 +1,27 @@
+<p><b>2020/06/17 Version 1.0.4</b></p>
+<p>
+ ● Optimize some processes<br/>
+ ● Now before deleting notes, users will be asked to avoid the situation of deleting by mistake<br/>
+ ● Optimize the reading of update log<br/>
+</p>
+<p><b>2020/06/16 Version 1.0.3</b></p>
+<p>
+ ● Fix date related irregularities<br/>
+</p>
+<p><b>2020/06/16 Version 1.0.2</b></p>
+<p>
+ ● Fix the problem that the list is not updated in time after modifying notes<br/>
+ ● Remove redundant close button from update information<br/>
+ ● Update log display mode to HTML<br/>
+ ● About page add update log module<br/>
+</p>
+<p><b>2020/06/15 Version 1.0.1</b></p>
+<p>
+ ● Add update log module<br/>
+</p>
+<p><b>2020/06/15 Version 1.0.0</b></p>
+<p>
+ ● Complete the basic framework<br/>
+ ● The basic function modules of adding, modifying, deleting and querying are realized<br/>
+ ● Add icon<br/>
+</p>
