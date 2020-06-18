@@ -6,6 +6,17 @@ Lazy Memorandum, a simple memorandum.<br/>
 
 ## Update Log
 
+### 2020/06/18 Version 1.0.6
+
+* Change update function
+* Fix update log display error
+* Upload items to fir.im
+ 
+### 2020/06/17 Version 1.0.5
+
+* Add update function
+* Upload items to Github
+
 ### 2020/06/17 Version 1.0.4
 
 * Optimize some processes

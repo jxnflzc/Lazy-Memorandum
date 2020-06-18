@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_update.*
 import okio.Okio
 import okio.buffer

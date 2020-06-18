@@ -1,9 +1,11 @@
 package per.jxnflzc.memorandumkotlin.activity
 
-import android.app.SearchManager
+import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
@@ -13,12 +15,14 @@ import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
+import okhttp3.internal.notify
 import org.json.JSONObject
 import org.litepal.LitePal
 import per.jxnflzc.memorandumkotlin.ActivityCollector
@@ -29,6 +33,7 @@ import per.jxnflzc.memorandumkotlin.activity.menu.UpdateActivity
 import per.jxnflzc.memorandumkotlin.adapter.MemorandumAdapter
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
+import per.jxnflzc.memorandumkotlin.util.UpdateUtil
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
@@ -49,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         ActivityCollector.addActivity(this)
         LitePal.getDatabase()
 
+        UpdateUtil.checkUpdate(this, UpdateUtil.NOTIFICATION)
+
         initMemorandumList()
         showMemorandumList()
 
@@ -56,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             EditMemorandumActivity.activityStart(this, EditType.ADD, requestCode = 1)
         }
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
