@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
+import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import okhttp3.*
 import per.jxnflzc.memorandumkotlin.BuildConfig
@@ -55,13 +56,11 @@ class UpdateUtil {
                     override fun onResponse(call: Call, response: Response) {
                         val result = response.body?.string()
                         val data = JsonParser().parse(result).asJsonObject
-                        val versionShort = data.get("versionShort").asString
-                        val updateUrl = data.get("update_url").asString
 
                         Looper.prepare()
                         when (flag) {
-                            NOTIFICATION -> notification(context, versionShort, updateUrl)
-                            DOWNLOAD -> download(context, versionShort, updateUrl)
+                            NOTIFICATION -> notification(context, data)
+                            DOWNLOAD -> download(context, data)
                         }
                         Looper.loop()
                     }
@@ -74,7 +73,10 @@ class UpdateUtil {
             }
         }
 
-        private fun notification(context: Context, versionShort: String, updateUrl: String){
+        private fun notification(context: Context, data: JsonObject){
+            val versionShort = data.get("versionShort").asString
+            val updateUrl = data.get("update_url").asString
+            val changelog = data.get("changelog").asString
             if (versionShort != BuildConfig.VERSION_NAME) {
                 val channelId = "19986"
                 val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -96,7 +98,10 @@ class UpdateUtil {
             }
         }
 
-        private fun download(context: Context, versionShort: String, updateUrl: String) {
+        private fun download(context: Context, data: JsonObject) {
+            val versionShort = data.get("versionShort").asString
+            val updateUrl = data.get("update_url").asString
+            val changelog = data.get("changelog").asString
             if (versionShort != BuildConfig.VERSION_NAME) {
                 AlertDialog.Builder(context).apply{
                     setTitle(R.string.find_update)
