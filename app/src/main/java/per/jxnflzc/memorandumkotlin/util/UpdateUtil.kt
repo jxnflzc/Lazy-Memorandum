@@ -88,11 +88,12 @@ class UpdateUtil {
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 val pi = PendingIntent.getActivity(context, 0, intent, 0)
                 val notification = NotificationCompat.Builder(context, channelId)
-                    .setContentTitle(context.getString(R.string.app_name))
+                    .setContentTitle(context.getString(R.string.find_update))
                     .setContentText(context.getString(R.string.find_update_confirm))
                     .setSmallIcon(R.mipmap.icon)
                     .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.icon))
                     .setContentIntent(pi)
+                    .setAutoCancel(true)
                     .build()
                 manager.notify(channelId.toInt(), notification)
             }
