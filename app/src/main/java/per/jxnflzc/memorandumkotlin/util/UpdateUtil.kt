@@ -23,9 +23,9 @@ import java.util.concurrent.TimeUnit
 
 class UpdateUtil {
     companion object {
-        const val URL = "https://api.bq04.com/apps/latest"
-        const val ID = "5eeac6ad23389f4934e55832"
-        const val API_TOKEN = "b28614c80f1ec9e189366857b3fada8b"
+        private const val URL = "https://api.bq04.com/apps/latest"
+        private const val ID = "5eeac6ad23389f4934e55832"
+        private const val API_TOKEN = "b28614c80f1ec9e189366857b3fada8b"
         const val NOTIFICATION = 0
         const val DOWNLOAD = 1
 

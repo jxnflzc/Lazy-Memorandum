@@ -1,3 +1,8 @@
+<p><b>2020/06/19 Version 1.0.9</b></p>
+<p>
+ ● Modify visibility of some variables<br/>
+ ● Fix incorrect upgrade notification title<br/>
+</p>
 <p><b>2020/06/19 Version 1.0.8</b></p>
 <p>
  ● Add the function of long press deletion in the list<br/>

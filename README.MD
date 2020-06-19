@@ -15,6 +15,11 @@ Lazy Memorandum, a simple memorandum.<br/>
 
 ## Update Log
 
+### 2020/06/19 Version 1.0.9
+
+* Modify visibility of some variables
+* Fix incorrect upgrade notification title
+
 ### 2020/06/19 Version 1.0.8
 
 * Add the function of long press deletion in the list
