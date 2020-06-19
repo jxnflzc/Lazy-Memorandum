@@ -1,19 +1,15 @@
 package per.jxnflzc.memorandumkotlin.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.activity.EditMemorandumActivity
 import per.jxnflzc.memorandumkotlin.extend.*
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MemorandumAdapter(private val memorandumList: MutableList<Memorandum>) :
         RecyclerView.Adapter<MemorandumAdapter.ViewHolder>() {
@@ -32,7 +28,11 @@ class MemorandumAdapter(private val memorandumList: MutableList<Memorandum>) :
             val memorandum = memorandumList[position]
             EditMemorandumActivity.activityStart(parent.context, EditType.EDIT, memorandum, 1)
         }
-
+        viewHolder.itemView.setOnLongClickListener {
+            val position = viewHolder.adapterPosition
+            onRemoveListener.onRemove(position)
+            true
+        }
         return viewHolder
     }
 
@@ -41,8 +41,17 @@ class MemorandumAdapter(private val memorandumList: MutableList<Memorandum>) :
         holder.txtMid.text = memorandum.mid
         holder.txtDate.text = memorandum.date.showDateInfo()
         holder.txtTitle.text = memorandum.title
-
     }
 
     override fun getItemCount() = memorandumList.size
+
+    interface OnRemoveListener {
+        fun onRemove(position: Int)
+    }
+
+    private lateinit var onRemoveListener: OnRemoveListener
+
+    fun setOnRemoveListener(onRemoveListener: OnRemoveListener) {
+        this.onRemoveListener = onRemoveListener
+    }
 }

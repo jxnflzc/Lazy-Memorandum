@@ -32,4 +32,5 @@
     <string name="more_than_words">More than $d words</string>
     <string name="check_version_failed">Check update failed</string>
     <string name="version_is_newest">Current is the latest version</string>
+    <string name="historical_version">Historical version</string>
 </resources>

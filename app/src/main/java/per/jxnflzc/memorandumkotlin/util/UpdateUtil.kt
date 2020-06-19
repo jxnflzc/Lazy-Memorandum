@@ -76,7 +76,6 @@ class UpdateUtil {
         private fun notification(context: Context, data: JsonObject){
             val versionShort = data.get("versionShort").asString
             val updateUrl = data.get("update_url").asString
-            val changelog = data.get("changelog").asString
             if (versionShort != BuildConfig.VERSION_NAME) {
                 val channelId = "19986"
                 val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -102,14 +101,12 @@ class UpdateUtil {
         private fun download(context: Context, data: JsonObject) {
             val versionShort = data.get("versionShort").asString
             val updateUrl = data.get("update_url").asString
-            val changelog = data.get("changelog").asString
             if (versionShort != BuildConfig.VERSION_NAME) {
                 AlertDialog.Builder(context).apply{
                     setTitle(R.string.find_update)
                     setMessage(R.string.find_update_confirm)
                     setPositiveButton(R.string.ok) { _, _ ->
-                        val uri = Uri.parse(updateUrl)
-                        context.startActivity(Intent(Intent.ACTION_VIEW, uri))
+                        UriUtil.openPageByUrl(context, updateUrl)
                     }
                     setNegativeButton(R.string.cancel, null)
                     create()

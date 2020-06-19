@@ -1,17 +1,36 @@
 ## Lazy Memorandum
 
 Lazy Memorandum, a simple memorandum.<br/>
-![Version](https://img.shields.io/badge/Version-1.0.6-brightgreen.svg)<br/>
+![Version](https://img.shields.io/badge/Version-1.0.8-brightgreen.svg)<br/>
 ![License](https://img.shields.io/badge/License-GPLv3.0-blue)
 
+## Some Dependencies
+
+![Litepal](https://img.shields.io/badge/Litepal-3.1.1-blueviolet)<br/>
+![Gson](https://img.shields.io/badge/Gson-2.8.5-blueviolet)<br/>
+![Anko](https://img.shields.io/badge/Anko-0.10.8-blueviolet)<br/>
+![Okhttp](https://img.shields.io/badge/Okhttp-4.7.2-blueviolet)<br/>
+![Okio](https://img.shields.io/badge/Okio-2.6.0-blueviolet)<br/>
+![](https://img.shields.io/badge/AndroidAboutPage-1.2.6-blueviolet)
+
 ## Update Log
+
+### 2020/06/19 Version 1.0.8
+
+* Add the function of long press deletion in the list
+* Fix incorrect GitHub link on about page
+* About page added historical version module
+
+### 2020/06/18 Version 1.0.7
+
+* Adapt to dark mode for a better experience
 
 ### 2020/06/18 Version 1.0.6
 
 * Change update function
 * Fix update log display error
 * Upload items to fir.im
- 
+
 ### 2020/06/17 Version 1.0.5
 
 * Add update function

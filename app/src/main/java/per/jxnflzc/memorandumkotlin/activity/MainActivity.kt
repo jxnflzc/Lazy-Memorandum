@@ -3,30 +3,18 @@ package per.jxnflzc.memorandumkotlin.activity
 import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
-import com.google.gson.JsonParser
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.*
-import okhttp3.internal.notify
-import org.json.JSONObject
 import org.litepal.LitePal
 import per.jxnflzc.memorandumkotlin.ActivityCollector
-import per.jxnflzc.memorandumkotlin.BuildConfig
 import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.activity.menu.AboutActivity
 import per.jxnflzc.memorandumkotlin.activity.menu.UpdateActivity
@@ -34,8 +22,6 @@ import per.jxnflzc.memorandumkotlin.adapter.MemorandumAdapter
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
 import per.jxnflzc.memorandumkotlin.util.UpdateUtil
-import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private var memorandumList = ArrayList<Memorandum>()
@@ -140,6 +126,30 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         listMemorandum.layoutManager = layoutManager
         val adapter = MemorandumAdapter(memorandumList)
+        val context = this
+
+        adapter.setOnRemoveListener(object: MemorandumAdapter.OnRemoveListener {
+            override fun onRemove(position: Int) {
+                AlertDialog.Builder(context).apply{
+                    setTitle(R.string.delete)
+                    setMessage(R.string.delete_confirm)
+                    setPositiveButton(R.string.ok) { _, _ ->
+                        val result = LitePal.delete(Memorandum::class.java, memorandumList[position].id)
+                        if (result > 0) {
+                            memorandumList.removeAt(position)
+                            adapter.notifyDataSetChanged()
+                            Toast.makeText(applicationContext, R.string.deleteSuccessful, Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(applicationContext, R.string.deleteFailed, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    setNegativeButton(R.string.cancel, null)
+                    create()
+                    show()
+                }
+            }
+        })
+        
         listMemorandum.adapter = adapter
     }
 }

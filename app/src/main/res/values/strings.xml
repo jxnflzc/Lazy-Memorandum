@@ -32,4 +32,5 @@
     <string name="more_than_words">字数超过$d</string>
     <string name="check_version_failed">检查更新失败</string>
     <string name="version_is_newest">当前是最新版本</string>
+    <string name="historical_version">历史版本</string>
 </resources>
