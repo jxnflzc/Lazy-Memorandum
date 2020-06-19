@@ -9,8 +9,8 @@ android {
         applicationId "per.jxnflzc.memorandumkotlin"
         minSdkVersion 26
         targetSdkVersion 29
-        versionCode 14
-        versionName "1.0.9"
+        versionCode 15
+        versionName "1.0.10"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +33,10 @@ dependencies {
 
     //Gson
     implementation "com.google.code.gson:gson:2.8.5"
+
+    //Markdown
+    implementation "io.noties.markwon:core:4.4.0"
+    implementation "io.noties.markwon:image:4.4.0"
 
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'com.github.medyo:android-about-page:1.2.6'

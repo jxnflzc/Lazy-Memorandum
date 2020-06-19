@@ -6,6 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.widget.Toast
+import io.noties.markwon.Markwon
+import io.noties.markwon.image.ImagesPlugin
+import io.noties.markwon.image.data.DataUriSchemeHandler
+import io.noties.markwon.image.network.NetworkSchemeHandler
+import io.noties.markwon.image.network.OkHttpNetworkSchemeHandler
 import kotlinx.android.synthetic.main.activity_update.*
 import okio.Okio
 import okio.buffer
@@ -32,10 +37,16 @@ class UpdateActivity : AppCompatActivity() {
     }
 
     private fun initUpdateInfo() {
-        val inputStream = resources.openRawResource(R.raw.updateinfo)
+        val inputStream = resources.openRawResource(R.raw.update_log)
         val bufferedSource  = inputStream.source().buffer()
         val sb = bufferedSource.readUtf8()
-        txtUpdate.text = Html.fromHtml(sb, Html.FROM_HTML_MODE_LEGACY)
+        val markdown = Markwon.builder(this)
+            .usePlugin(ImagesPlugin.create{ plugin: ImagesPlugin ->
+                    plugin.addSchemeHandler(OkHttpNetworkSchemeHandler.create());
+            })
+            .build()
+        markdown.setMarkdown(txtUpdate, sb)
+        //txtUpdate.text = Html.fromHtml(sb, Html.FROM_HTML_MODE_LEGACY)
     }
 
     override fun onDestroy() {

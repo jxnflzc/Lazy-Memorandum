@@ -1,20 +1,3 @@
-## Lazy Memorandum
-
-Lazy Memorandum, a simple memorandum.<br/>
-![Version](https://img.shields.io/badge/Version-1.0.9-brightgreen.svg)<br/>
-![License](https://img.shields.io/badge/License-GPLv3.0-blue)
-
-## Some Dependencies
-
-![Litepal](https://img.shields.io/badge/Litepal-3.1.1-blueviolet)<br/>
-![Gson](https://img.shields.io/badge/Gson-2.8.5-blueviolet)<br/>
-![Anko](https://img.shields.io/badge/Anko-0.10.8-blueviolet)<br/>
-![Okhttp](https://img.shields.io/badge/Okhttp-4.7.2-blueviolet)<br/>
-![Okio](https://img.shields.io/badge/Okio-2.6.0-blueviolet)<br/>
-![](https://img.shields.io/badge/AndroidAboutPage-1.2.6-blueviolet)
-
-## Update Log
-
 ### 2020/06/19 Version 1.0.10
 
 * Optimize the display of update logs for better experience
@@ -67,6 +50,7 @@ Lazy Memorandum, a simple memorandum.<br/>
 * Add update log module
 
 ### 2020/06/15 Version 1.0.0
+
 * Complete the basic framework
 * The basic function modules of adding, modifying, deleting and querying are realized
 * Add icon
