@@ -6,12 +6,12 @@ Lazy Memorandum, a simple memorandum.<br/>
 
 ## Some Dependencies
 
-![Litepal](https://img.shields.io/badge/Litepal-3.1.1-blueviolet)<br/>
-![Gson](https://img.shields.io/badge/Gson-2.8.5-blueviolet)<br/>
-![Anko](https://img.shields.io/badge/Anko-0.10.8-blueviolet)<br/>
-![Okhttp](https://img.shields.io/badge/Okhttp-4.7.2-blueviolet)<br/>
-![Okio](https://img.shields.io/badge/Okio-2.6.0-blueviolet)<br/>
-![](https://img.shields.io/badge/AndroidAboutPage-1.2.6-blueviolet)
+[![Litepal](https://img.shields.io/badge/Litepal-3.1.1-blueviolet)](https://github.com/LitePalFramework/LitePal)<br/>
+[![Gson](https://img.shields.io/badge/Gson-2.8.6-blueviolet)](https://github.com/google/gson)<br/>
+[![Anko](https://img.shields.io/badge/Anko-0.10.8-blueviolet)](https://github.com/Kotlin/anko)<br/>
+[![Okhttp](https://img.shields.io/badge/Okhttp-4.7.2-blueviolet)](https://github.com/square/okhttp)<br/>
+[![Okio](https://img.shields.io/badge/Okio-2.6.0-blueviolet)](https://github.com/square/okio)<br/>
+[![AndroidAboutPage](https://img.shields.io/badge/AndroidAboutPage-1.2.6-blueviolet)](https://github.com/medyo/android-about-page)
 
 ## Update Log
 
