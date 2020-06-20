@@ -1,7 +1,7 @@
 ## Lazy Memorandum
 
 Lazy Memorandum, a simple memorandum.<br/>
-[![Version](https://img.shields.io/badge/Version-1.1.1-brightgreen.svg)](https://github.com/jxnflzc/Lazy-Memorandum)<br/>
+[![Version](https://img.shields.io/badge/Version-1.2.0-brightgreen.svg)](https://github.com/jxnflzc/Lazy-Memorandum)<br/>
 [![License](https://img.shields.io/badge/License-GPLv3.0-blue)](https://github.com/jxnflzc/Lazy-Memorandum/blob/master/LICENSE)
 
 ## Some Dependencies
