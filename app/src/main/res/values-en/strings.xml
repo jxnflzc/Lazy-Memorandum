@@ -33,4 +33,6 @@
     <string name="check_version_failed">Check update failed</string>
     <string name="version_is_newest">Current is the latest version</string>
     <string name="historical_version">Historical version</string>
+    <string name="no_catalog">No catalog</string>
+    <string name="catalog">Catalog</string>
 </resources>

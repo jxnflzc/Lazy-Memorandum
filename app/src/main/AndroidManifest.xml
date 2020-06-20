@@ -17,7 +17,7 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".activity.menu.AboutActivity"
-            android:label="@string/about"/>
+            android:label="@string/about" />
         <activity
             android:name=".activity.menu.UpdateActivity"
             android:label="@string/update_log"

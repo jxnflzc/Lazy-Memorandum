@@ -1,3 +1,8 @@
+### 2020/06/20 Version 1.2.0
+
+* New classification function of notes
+* The classification function only queries the notes under the classification temporarily
+
 ### 2020/06/20 Version 1.1.1
 
 * Optimization log tool class

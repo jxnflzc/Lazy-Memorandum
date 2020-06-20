@@ -10,11 +10,12 @@ import per.jxnflzc.memorandumkotlin.activity.EditMemorandumActivity
 import per.jxnflzc.memorandumkotlin.extend.*
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
+import per.jxnflzc.memorandumkotlin.service.impl.CatalogServiceImpl
 
 class MemorandumAdapter(private val memorandumList: ArrayList<Memorandum>) :
         RecyclerView.Adapter<MemorandumAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var txtId: TextView = view.findViewById(R.id.txtId)
+        var txtCatalog: TextView = view.findViewById(R.id.txtCatalog)
         var txtDate: TextView = view.findViewById(R.id.txtDate)
         var txtTitle: TextView = view.findViewById(R.id.txtTitle)
     }
@@ -38,7 +39,8 @@ class MemorandumAdapter(private val memorandumList: ArrayList<Memorandum>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val memorandum = memorandumList[position]
-        holder.txtId.text = memorandum.id.toString()
+        val catalogService = CatalogServiceImpl()
+        holder.txtCatalog.text = catalogService.getCatalog(memorandum.catalogId).name
         holder.txtDate.text = memorandum.date.showDateInfo()
         holder.txtTitle.text = memorandum.title
     }

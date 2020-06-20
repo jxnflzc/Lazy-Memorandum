@@ -3,14 +3,13 @@ package per.jxnflzc.memorandumkotlin.activity
 import android.app.*
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,12 +22,16 @@ import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication.Companion.logger
 import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.activity.menu.AboutActivity
 import per.jxnflzc.memorandumkotlin.activity.menu.UpdateActivity
+import per.jxnflzc.memorandumkotlin.adapter.CatalogAdapter
 import per.jxnflzc.memorandumkotlin.adapter.MemorandumAdapter
+import per.jxnflzc.memorandumkotlin.model.Catalog
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
-import per.jxnflzc.memorandumkotlin.util.LogUtil
+import per.jxnflzc.memorandumkotlin.service.impl.CatalogServiceImpl
 import per.jxnflzc.memorandumkotlin.util.UpdateUtil
 import per.jxnflzc.memorandumkotlin.viewmodel.MainViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity() {
     private lateinit var viewModel: MainViewModel
@@ -45,14 +48,21 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ActivityCollector.addActivity(this)
-        //LitePal.deleteAll(Memorandum::class.java)
-        LitePal.getDatabase()
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.drawable.ic_menu)
+        }
+
+        initDataBase()
 
         UpdateUtil.checkUpdate(this, UpdateUtil.NOTIFICATION)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.memorandumList.observe(this, Observer {
             showMemorandumList(it)
+        })
+        viewModel.catalogList.observe(this, Observer {
+            showMCatalogList(it)
         })
 
         btnAdd.setOnClickListener{
@@ -102,8 +112,22 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             R.id.itemHelp -> UpdateActivity.activityStart(this)
             R.id.itemAbout -> AboutActivity.activityStart(this)
+            android.R.id.home -> dr.openDrawer(GravityCompat.START)
         }
         return true
+    }
+
+    private fun initDataBase() {
+        LitePal.getDatabase()
+        val sp = getSharedPreferences("database", Context.MODE_PRIVATE)
+        val catalogInit = sp.getBoolean("catalog_init", false)
+        val editor = sp.edit()
+        if (!catalogInit) {
+            val catalog = Catalog()
+            catalog.save()
+            editor.putBoolean("catalog_init", true)
+            editor.apply()
+        }
     }
 
     //显示备忘录列表
@@ -119,9 +143,9 @@ class MainActivity : BaseActivity() {
                     setTitle(R.string.delete)
                     setMessage(R.string.delete_confirm)
                     setPositiveButton(R.string.ok) { _, _ ->
-                        val result = viewModel.delete(position)
+                        val result = viewModel.deleteMemorandum(position)
                         if (result > 0) {
-                            viewModel.remove(position)
+                            viewModel.removeMemorandum(position)
                             adapter.notifyDataSetChanged()
                             Toast.makeText(MemorandumKotlinApplication.context, R.string.deleteSuccessful, Toast.LENGTH_SHORT).show()
                         } else {
@@ -134,7 +158,24 @@ class MainActivity : BaseActivity() {
                 }
             }
         })
-        
+
         listMemorandum.adapter = adapter
+    }
+
+    //显示备忘录列表
+    private fun showMCatalogList(catalogList: ArrayList<Catalog>) {
+        val layoutManager = LinearLayoutManager(this)
+        listCatalog.layoutManager = layoutManager
+        val adapter = CatalogAdapter(catalogList)
+
+
+
+        adapter.setOnSearchListener(object: CatalogAdapter.OnSearchListener {
+            override fun onSearch(catalogId: Long) {
+                viewModel.searchMemorandumByCatalogId(catalogId)
+            }
+        })
+
+        listCatalog.adapter = adapter
     }
 }

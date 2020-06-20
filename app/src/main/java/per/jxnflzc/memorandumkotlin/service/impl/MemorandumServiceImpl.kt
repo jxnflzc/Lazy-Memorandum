@@ -17,6 +17,10 @@ class MemorandumServiceImpl: MemorandumService {
         return LitePal.order("date desc").find(Memorandum::class.java) as ArrayList<Memorandum>
     }
 
+    override fun getMemorandumByCatalog(catalogId: Long): ArrayList<Memorandum> {
+        return LitePal.order("date desc").where("catalogId = ?", catalogId.toString()).find(Memorandum::class.java) as ArrayList<Memorandum>
+    }
+
     override fun getSearchMemorandum(query: String): ArrayList<Memorandum> {
         return LitePal.where("title like ? or content like ?", "%$query%", "%$query%").order("date desc").find(Memorandum::class.java) as ArrayList<Memorandum>
     }
