@@ -17,11 +17,11 @@ Lazy Memorandum, a simple memorandum.<br/>
 
 ### Light Mode
 
-<img src="https://i.loli.net/2020/06/20/1h3qZI4cUWzDQdv.png" alt="Screenshot_1592639269.png" title="Memorandum List" width="200px" /><img src="https://i.loli.net/2020/06/20/n6eb2y8B1k7mQEt.png" alt="Screenshot_1592639244.png" title="Add Page" width="200px" /><img src="https://i.loli.net/2020/06/20/OQoXub4qlCT5YfU.png" alt="Screenshot_1592639291.png" title="Edit Page" width="200px" /><img src="https://i.loli.net/2020/06/20/AaoLzvTXNOSJEtP.png" alt="Screenshot_1592639312.png" title="Search" width="200px" /><img src="https://i.loli.net/2020/06/20/hkF35vemWVOyRE6.png" alt="Screenshot_1592639365.png" title="About Page" width="200px" /><img src="https://i.loli.net/2020/06/20/Z5a2fdACXwVQkrU.png" alt="Screenshot_1592639367.png" title="Update Log" width="200px" />
+<img src="https://i.loli.net/2020/06/20/1h3qZI4cUWzDQdv.png" alt="Screenshot_1592639269.png" title="Memorandum List" width="300px" /><img src="https://i.loli.net/2020/06/20/n6eb2y8B1k7mQEt.png" alt="Screenshot_1592639244.png" title="Add Page" width="300px" /><img src="https://i.loli.net/2020/06/20/OQoXub4qlCT5YfU.png" alt="Screenshot_1592639291.png" title="Edit Page" width="300px" /><img src="https://i.loli.net/2020/06/20/AaoLzvTXNOSJEtP.png" alt="Screenshot_1592639312.png" title="Search" width="300px" /><img src="https://i.loli.net/2020/06/20/hkF35vemWVOyRE6.png" alt="Screenshot_1592639365.png" title="About Page" width="300px" /><img src="https://i.loli.net/2020/06/20/Z5a2fdACXwVQkrU.png" alt="Screenshot_1592639367.png" title="Update Log" width="300px" />
 
 ### Dark Mode
 
-<img src="https://i.loli.net/2020/06/20/qbvgRSaxTykmfct.png" alt="Screenshot_1592639377.png" title="Memorandum List" width="200px" /><img src="https://i.loli.net/2020/06/20/TSFYbgJj6nmsWvM.png" alt="Screenshot_1592639388.png" title="Edit Page" width="200px" /><img src="https://i.loli.net/2020/06/20/uzwbTj1hWx4VSne.png" alt="Screenshot_1592639393.png" title="About Page" width="200px" /><img src="https://i.loli.net/2020/06/20/rmdphFBK9Wz7bYZ.png" alt="Screenshot_1592639396.png" title="Update Log" width="200px" />
+<img src="https://i.loli.net/2020/06/20/qbvgRSaxTykmfct.png" alt="Screenshot_1592639377.png" title="Memorandum List" width="300px" /><img src="https://i.loli.net/2020/06/20/TSFYbgJj6nmsWvM.png" alt="Screenshot_1592639388.png" title="Edit Page" width="300px" /><img src="https://i.loli.net/2020/06/20/uzwbTj1hWx4VSne.png" alt="Screenshot_1592639393.png" title="About Page" width="300px" /><img src="https://i.loli.net/2020/06/20/rmdphFBK9Wz7bYZ.png" alt="Screenshot_1592639396.png" title="Update Log" width="300px" />
 
 ## Update Log
 
