@@ -15,6 +15,10 @@ Lazy Memorandum, a simple memorandum.<br/>
 
 ## Update Log
 
+### 2020/06/20 Version 1.0.11
+
+* Optimize the display of update log to avoid the text at the bottom being blocked
+
 ### 2020/06/19 Version 1.0.10
 
 * Optimize the display of update logs for better experience
