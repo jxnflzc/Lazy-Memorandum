@@ -11,6 +11,10 @@ class MainViewModel() : ViewModel() {
 
     private val memorandumService = MemorandumServiceImpl()
 
+    init {
+        initMemorandum()
+    }
+
     fun initMemorandum() {
         memorandumList.value = memorandumService.getAllMemorandum()
     }

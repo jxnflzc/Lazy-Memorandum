@@ -2,34 +2,26 @@ package per.jxnflzc.memorandumkotlin.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_edit_memorandum.*
-import org.litepal.LitePal
-import org.litepal.crud.LitePalSupport
 import per.jxnflzc.memorandumkotlin.ActivityCollector
 import per.jxnflzc.memorandumkotlin.BaseActivity
 import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication
 import per.jxnflzc.memorandumkotlin.R
-import per.jxnflzc.memorandumkotlin.extend.showDateInfo
 import per.jxnflzc.memorandumkotlin.extend.toSimpleString
+import per.jxnflzc.memorandumkotlin.factory.EditViewModelFactory
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
 import per.jxnflzc.memorandumkotlin.viewmodel.EditViewModel
-import per.jxnflzc.memorandumkotlin.viewmodel.MainViewModel
-import java.util.*
 import kotlin.properties.Delegates
 
 class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
@@ -39,7 +31,7 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
         fun activityStart(context: Context, type: EditType, memorandum: Memorandum = Memorandum(), requestCode: Int = 0) {
-            val intent = Intent(context, EditMemorandumActivity::class.java).apply {   }
+            val intent = Intent(context, EditMemorandumActivity::class.java)
             val bundle = Bundle()
             bundle.putSerializable("type", type)
             bundle.putSerializable("memorandum", memorandum)
@@ -59,16 +51,19 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
 
         initListener()
         txtWordNum.text = "0"
-        viewModel = ViewModelProvider(this).get(EditViewModel::class.java)
 
         val intent = intent
         val bundle = intent.extras
         type = bundle?.getSerializable("type") as EditType
-        viewModel.memorandum.value = bundle.getSerializable("memorandum") as Memorandum
+        val memorandum = bundle.getSerializable("memorandum") as Memorandum
+        viewModel = ViewModelProvider(this, EditViewModelFactory(memorandum)).get(EditViewModel::class.java)
+        viewModel.memorandum.observe(this, Observer {
+            showMemorandum(it)
+        })
 
         when (type) {
             EditType.EDIT -> {
-                showMemorandum(viewModel.memorandum.value!!)
+                btnSave.setText(R.string.change)
             }
             EditType.ADD -> {
                 txtWordNum.text = "0/$maxNum"
@@ -81,8 +76,9 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
     private fun showMemorandum(memorandum: Memorandum) {
         edtTitle.setText(memorandum.title)
         edtContent.setText(memorandum.content)
-        txtDate.text = memorandum.date.toSimpleString()
-        btnSave.setText(R.string.change)
+        if (txtDate.visibility == View.VISIBLE) {
+            txtDate.text = memorandum.date.toSimpleString()
+        }
     }
 
     private fun initListener(){
@@ -153,11 +149,9 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
 
     private fun changeMemorandum() {
         if (validate()){
-            viewModel.memorandum.value?.title = edtTitle.text.toString()
-            viewModel.memorandum.value?.content = edtContent.text.toString()
-            viewModel.memorandum.value?.date = Date()
+            viewModel.setMemorandum(edtTitle.text.toString(), edtContent.text.toString())
 
-            if (viewModel.memorandum.value?.id?.let { viewModel.memorandum.value?.update(it) }!! > 0) {
+            if (viewModel.update() > 0) {
                 setResult(101)
                 Toast.makeText(MemorandumKotlinApplication.context, R.string.changeSuccessful, Toast.LENGTH_SHORT).show()
                 finish()
@@ -173,13 +167,8 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
             setMessage(R.string.delete_confirm)
             setPositiveButton(R.string.ok) { _, _ ->
 
-                val result =
-                    viewModel.memorandum.value?.id?.let {
-                        LitePal.delete(Memorandum::class.java,
-                            it
-                        )
-                    }
-                if (result ?: 0 > 0) {
+                val result = viewModel.delete()
+                if (result > 0) {
                     setResult(101)
                     Toast.makeText(MemorandumKotlinApplication.context, R.string.deleteSuccessful, Toast.LENGTH_SHORT).show()
                     finish()
@@ -195,9 +184,9 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
 
     private fun addMemorandum() {
         if (validate()){
-            viewModel.memorandum.value = Memorandum(edtTitle.text.toString(), edtContent.text.toString())
+            viewModel.setMemorandum(edtTitle.text.toString(), edtContent.text.toString())
 
-            if (viewModel.memorandum.value?.save()!!) {
+            if (viewModel.save()) {
                 setResult(101)
                 Toast.makeText(MemorandumKotlinApplication.context, R.string.saveSuccessful, Toast.LENGTH_SHORT).show()
                 finish()

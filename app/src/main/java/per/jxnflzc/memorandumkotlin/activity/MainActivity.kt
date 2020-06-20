@@ -11,14 +11,15 @@ import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.litepal.LitePal
 import per.jxnflzc.memorandumkotlin.ActivityCollector
 import per.jxnflzc.memorandumkotlin.BaseActivity
 import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication
+import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication.Companion.logger
 import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.activity.menu.AboutActivity
 import per.jxnflzc.memorandumkotlin.activity.menu.UpdateActivity
@@ -44,14 +45,15 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ActivityCollector.addActivity(this)
+        //LitePal.deleteAll(Memorandum::class.java)
         LitePal.getDatabase()
 
         UpdateUtil.checkUpdate(this, UpdateUtil.NOTIFICATION)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-        viewModel.initMemorandum()
-        showMemorandumList()
+        viewModel.memorandumList.observe(this, Observer {
+            showMemorandumList(it)
+        })
 
         btnAdd.setOnClickListener{
             EditMemorandumActivity.activityStart(this, EditType.ADD, requestCode = 1)
@@ -62,9 +64,8 @@ class MainActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
             101-> {//1：memorandumList可能会改变，对应requestCode = 1，01：memorandumList发生改变
-                LogUtil.d("MainActivity", "initMemorandumList")
+                logger.d("MainActivity", "initMemorandumList")
                 viewModel.initMemorandum()
-                showMemorandumList()
             }
         }
     }
@@ -78,7 +79,6 @@ class MainActivity : BaseActivity() {
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String): Boolean {
                 viewModel.searchMemorandum(query)
-                showMemorandumList()
                 searchView.clearFocus()
                 return false;
             }
@@ -89,7 +89,6 @@ class MainActivity : BaseActivity() {
         })
         searchView.setOnCloseListener {
             viewModel.initMemorandum()
-            showMemorandumList()
             searchView.clearFocus()
 
             true
@@ -108,10 +107,10 @@ class MainActivity : BaseActivity() {
     }
 
     //显示备忘录列表
-    private fun showMemorandumList() {
+    private fun showMemorandumList(memorandumList: ArrayList<Memorandum>) {
         val layoutManager = LinearLayoutManager(this)
         listMemorandum.layoutManager = layoutManager
-        val adapter = MemorandumAdapter(viewModel.memorandumList.value ?: ArrayList<Memorandum>())
+        val adapter = MemorandumAdapter(memorandumList)
         val context = this
 
         adapter.setOnRemoveListener(object: MemorandumAdapter.OnRemoveListener {

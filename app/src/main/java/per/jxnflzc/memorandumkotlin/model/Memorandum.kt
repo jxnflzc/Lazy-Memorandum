@@ -7,7 +7,6 @@ import java.util.*
 
 class Memorandum constructor(): LitePalSupport(), Serializable {
     var id: Long = 0
-    lateinit var mid: String
     var title: String = ""
     lateinit var date: Date//date初始化在这里会导致无法修改的问题
     var content: String = ""
@@ -19,12 +18,11 @@ class Memorandum constructor(): LitePalSupport(), Serializable {
 
     constructor(title: String, content: String): this() {
         this.date = Date()
-        mid = date.toIdString()
         this.title = title
         this.content = content
     }
 
     override fun toString(): String {
-        return "mid: $mid\ntitle: $title\ndate: $date\ncontent: $content"
+        return "id: $id\ntitle: $title\ndate: $date\ncontent: $content"
     }
 }

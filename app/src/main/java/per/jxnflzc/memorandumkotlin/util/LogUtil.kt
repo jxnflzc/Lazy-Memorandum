@@ -2,21 +2,26 @@ package per.jxnflzc.memorandumkotlin.util
 
 import android.util.Log
 
-object LogUtil {
+class LogUtil(level: Int) {
+    companion object {
+        const val VERBOSE = 1
 
-    private const val VERBOSE = 1
+        const val DEBUG = 2
 
-    private const val DEBUG = 2
+        const val INFO = 3
 
-    private const val INFO = 3
+        const val WARN = 4
 
-    private const val WARN = 4
+        const val ERROR = 5
 
-    private const val ERROR = 5
+        const val NONE = 6
+    }
 
-    private const val NONE = 6
+    private var level = VERBOSE
 
-    private const val level = VERBOSE
+    init {
+        this.level = level
+    }
 
     fun v(tag: String, msg: String) {
         if (level <= VERBOSE) {

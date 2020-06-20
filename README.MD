@@ -1,7 +1,7 @@
 ## Lazy Memorandum
 
 Lazy Memorandum, a simple memorandum.<br/>
-[![Version](https://img.shields.io/badge/Version-1.0.11-brightgreen.svg)](https://github.com/jxnflzc/Lazy-Memorandum)<br/>
+[![Version](https://img.shields.io/badge/Version-1.1.1-brightgreen.svg)](https://github.com/jxnflzc/Lazy-Memorandum)<br/>
 [![License](https://img.shields.io/badge/License-GPLv3.0-blue)](https://github.com/jxnflzc/Lazy-Memorandum/blob/master/LICENSE)
 
 ## Some Dependencies
@@ -13,7 +13,32 @@ Lazy Memorandum, a simple memorandum.<br/>
 [![Okio](https://img.shields.io/badge/Okio-2.6.0-blueviolet)](https://github.com/square/okio)<br/>
 [![AndroidAboutPage](https://img.shields.io/badge/AndroidAboutPage-1.2.6-blueviolet)](https://github.com/medyo/android-about-page)
 
+## Screenshot
+
+### Light Mode
+
+![Screenshot_1592639269.png](https://i.loli.net/2020/06/20/1h3qZI4cUWzDQdv.png "Memorandum List")
+![Screenshot_1592639244.png](https://i.loli.net/2020/06/20/n6eb2y8B1k7mQEt.png "Add Page")
+![Screenshot_1592639291.png](https://i.loli.net/2020/06/20/OQoXub4qlCT5YfU.png "Edit Page")
+![Screenshot_1592639312.png](https://i.loli.net/2020/06/20/AaoLzvTXNOSJEtP.png "Search")
+![Screenshot_1592639365.png](https://i.loli.net/2020/06/20/hkF35vemWVOyRE6.png "About Page")
+![Screenshot_1592639367.png](https://i.loli.net/2020/06/20/Z5a2fdACXwVQkrU.png "Update Log")
+
+### Dark Mode
+
+![Screenshot_1592639377.png](https://i.loli.net/2020/06/20/qbvgRSaxTykmfct.png "Memorandum List")
+![Screenshot_1592639388.png](https://i.loli.net/2020/06/20/TSFYbgJj6nmsWvM.png "Edit Page")
+![Screenshot_1592639393.png](https://i.loli.net/2020/06/20/uzwbTj1hWx4VSne.png "About Page")
+![Screenshot_1592639396.png](https://i.loli.net/2020/06/20/rmdphFBK9Wz7bYZ.png "Update Log")
+
 ## Update Log
+
+### 2020/06/20 Version 1.1.1
+
+* Optimization log tool class
+* Fully adapt to dark mode for better visual experience
+* Modify some code logic
+* The main page and edit page are reconstructed with ViewModel
 
 ### 2020/06/20 Version 1.1.0
 

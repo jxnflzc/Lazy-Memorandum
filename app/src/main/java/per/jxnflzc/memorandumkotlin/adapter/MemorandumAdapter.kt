@@ -14,7 +14,7 @@ import per.jxnflzc.memorandumkotlin.model.Memorandum
 class MemorandumAdapter(private val memorandumList: ArrayList<Memorandum>) :
         RecyclerView.Adapter<MemorandumAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var txtMid: TextView = view.findViewById(R.id.txtMid)
+        var txtId: TextView = view.findViewById(R.id.txtId)
         var txtDate: TextView = view.findViewById(R.id.txtDate)
         var txtTitle: TextView = view.findViewById(R.id.txtTitle)
     }
@@ -38,7 +38,7 @@ class MemorandumAdapter(private val memorandumList: ArrayList<Memorandum>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val memorandum = memorandumList[position]
-        holder.txtMid.text = memorandum.mid
+        holder.txtId.text = memorandum.id.toString()
         holder.txtDate.text = memorandum.date.showDateInfo()
         holder.txtTitle.text = memorandum.title
     }

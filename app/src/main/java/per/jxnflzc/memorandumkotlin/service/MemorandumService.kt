@@ -8,4 +8,8 @@ interface MemorandumService {
     fun getAllMemorandum(): ArrayList<Memorandum>
 
     fun getSearchMemorandum(query: String): ArrayList<Memorandum>
+
+    fun update(memorandum: Memorandum): Int
+
+    fun save(memorandum: Memorandum): Boolean
 }

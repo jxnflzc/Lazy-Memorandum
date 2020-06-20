@@ -1,3 +1,10 @@
+### 2020/06/20 Version 1.1.1
+
+* Optimization log tool class
+* Fully adapt to dark mode for better visual experience
+* Modify some code logic
+* The main page and edit page are reconstructed with ViewModel
+
 ### 2020/06/20 Version 1.1.0
 
 * Modify some code logic
