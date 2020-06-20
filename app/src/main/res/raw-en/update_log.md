@@ -2,6 +2,7 @@
 
 * New classification function of notes
 * The classification function only queries the notes under the classification temporarily
+**This version is not compatible with the data structure of the previous version. Please remove the old version and install again**
 
 ### 2020/06/20 Version 1.1.1
 

@@ -47,13 +47,12 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ActivityCollector.addActivity(this)
+        initDataBase()
+
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.ic_menu)
         }
-
-        initDataBase()
 
         UpdateUtil.checkUpdate(this, UpdateUtil.NOTIFICATION)
 
