@@ -17,19 +17,19 @@ Lazy Memorandum, a simple memorandum.<br/>
 
 ### Light Mode
 
-![Screenshot_1592639269.png](https://i.loli.net/2020/06/20/1h3qZI4cUWzDQdv.png "Memorandum List")
-![Screenshot_1592639244.png](https://i.loli.net/2020/06/20/n6eb2y8B1k7mQEt.png "Add Page")
-![Screenshot_1592639291.png](https://i.loli.net/2020/06/20/OQoXub4qlCT5YfU.png "Edit Page")
-![Screenshot_1592639312.png](https://i.loli.net/2020/06/20/AaoLzvTXNOSJEtP.png "Search")
-![Screenshot_1592639365.png](https://i.loli.net/2020/06/20/hkF35vemWVOyRE6.png "About Page")
-![Screenshot_1592639367.png](https://i.loli.net/2020/06/20/Z5a2fdACXwVQkrU.png "Update Log")
+<img src="https://i.loli.net/2020/06/20/1h3qZI4cUWzDQdv.png" alt="Screenshot_1592639269.png" title="Memorandum List" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/06/20/n6eb2y8B1k7mQEt.png" alt="Screenshot_1592639244.png" title="Add Page" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/06/20/OQoXub4qlCT5YfU.png" alt="Screenshot_1592639291.png" title="Edit Page" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/06/20/AaoLzvTXNOSJEtP.png" alt="Screenshot_1592639312.png" title="Search" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/06/20/hkF35vemWVOyRE6.png" alt="Screenshot_1592639365.png" title="About Page" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/06/20/Z5a2fdACXwVQkrU.png" alt="Screenshot_1592639367.png" title="Update Log" style="zoom:33%;" />
 
 ### Dark Mode
 
-![Screenshot_1592639377.png](https://i.loli.net/2020/06/20/qbvgRSaxTykmfct.png "Memorandum List")
-![Screenshot_1592639388.png](https://i.loli.net/2020/06/20/TSFYbgJj6nmsWvM.png "Edit Page")
-![Screenshot_1592639393.png](https://i.loli.net/2020/06/20/uzwbTj1hWx4VSne.png "About Page")
-![Screenshot_1592639396.png](https://i.loli.net/2020/06/20/rmdphFBK9Wz7bYZ.png "Update Log")
+<img src="https://i.loli.net/2020/06/20/qbvgRSaxTykmfct.png" alt="Screenshot_1592639377.png" title="Memorandum List" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/06/20/TSFYbgJj6nmsWvM.png" alt="Screenshot_1592639388.png" title="Edit Page" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/06/20/uzwbTj1hWx4VSne.png" alt="Screenshot_1592639393.png" title="About Page" style="zoom:33%;" />
+<img src="https://i.loli.net/2020/06/20/rmdphFBK9Wz7bYZ.png" alt="Screenshot_1592639396.png" title="Update Log" style="zoom:33%;" />
 
 ## Update Log
 
