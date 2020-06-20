@@ -11,7 +11,7 @@ import per.jxnflzc.memorandumkotlin.extend.*
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
 
-class MemorandumAdapter(private val memorandumList: MutableList<Memorandum>) :
+class MemorandumAdapter(private val memorandumList: ArrayList<Memorandum>) :
         RecyclerView.Adapter<MemorandumAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var txtMid: TextView = view.findViewById(R.id.txtMid)

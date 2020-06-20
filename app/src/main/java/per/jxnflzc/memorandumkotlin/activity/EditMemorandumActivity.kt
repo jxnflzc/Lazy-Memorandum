@@ -15,22 +15,27 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_edit_memorandum.*
 import org.litepal.LitePal
 import org.litepal.crud.LitePalSupport
 import per.jxnflzc.memorandumkotlin.ActivityCollector
+import per.jxnflzc.memorandumkotlin.BaseActivity
+import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication
 import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.extend.showDateInfo
 import per.jxnflzc.memorandumkotlin.extend.toSimpleString
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
+import per.jxnflzc.memorandumkotlin.viewmodel.EditViewModel
+import per.jxnflzc.memorandumkotlin.viewmodel.MainViewModel
 import java.util.*
 import kotlin.properties.Delegates
 
-class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
+class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
     private var type = EditType.ADD//编辑页面的类型，默认为ADD（添加）
-    private lateinit var memorandum: Memorandum//从上一页面传入的笔记
     private val maxNum = 50000//笔记内容的最大字数
+    private lateinit var viewModel: EditViewModel
 
     companion object {
         fun activityStart(context: Context, type: EditType, memorandum: Memorandum = Memorandum(), requestCode: Int = 0) {
@@ -39,7 +44,11 @@ class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
             bundle.putSerializable("type", type)
             bundle.putSerializable("memorandum", memorandum)
             intent.putExtras(bundle)
-            (context as Activity).startActivityForResult(intent, requestCode)
+            if (context is Activity) {
+                context.startActivityForResult(intent, requestCode)
+            } else {
+                context.startActivity(intent)
+            }
         }
     }
 
@@ -50,15 +59,16 @@ class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
 
         initListener()
         txtWordNum.text = "0"
+        viewModel = ViewModelProvider(this).get(EditViewModel::class.java)
 
         val intent = intent
         val bundle = intent.extras
         type = bundle?.getSerializable("type") as EditType
-        memorandum = bundle.getSerializable("memorandum") as Memorandum
+        viewModel.memorandum.value = bundle.getSerializable("memorandum") as Memorandum
 
         when (type) {
             EditType.EDIT -> {
-                showMemorandum(memorandum)
+                showMemorandum(viewModel.memorandum.value!!)
             }
             EditType.ADD -> {
                 txtWordNum.text = "0/$maxNum"
@@ -93,6 +103,7 @@ class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
                 word = s
             }
 
+            @SuppressLint("StringFormatInvalid")
             override fun afterTextChanged(s: Editable?) {
                 txtWordNum.text = String.format("${s?.length.toString()}/$maxNum")
                 start = edtContent.selectionStart
@@ -102,7 +113,7 @@ class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
                     val endPosition = end
                     edtContent.text = s
                     edtContent.setSelection(endPosition)
-                    Toast.makeText(applicationContext, getString(R.string.more_than_words, maxNum), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(MemorandumKotlinApplication.context, getString(R.string.more_than_words, maxNum), Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -134,7 +145,7 @@ class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun validateContent(): Boolean {
         if (edtContent.text.toString().isBlank()) {
-            Toast.makeText(applicationContext, R.string.validateContentFailed, Toast.LENGTH_SHORT).show()
+            Toast.makeText(MemorandumKotlinApplication.context, R.string.validateContentFailed, Toast.LENGTH_SHORT).show()
             return false
         }
         return true
@@ -142,16 +153,16 @@ class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun changeMemorandum() {
         if (validate()){
-            memorandum.title = edtTitle.text.toString()
-            memorandum.content = edtContent.text.toString()
-            memorandum.date = Date()
+            viewModel.memorandum.value?.title = edtTitle.text.toString()
+            viewModel.memorandum.value?.content = edtContent.text.toString()
+            viewModel.memorandum.value?.date = Date()
 
-            if (memorandum.update(memorandum.id) > 0) {
+            if (viewModel.memorandum.value?.id?.let { viewModel.memorandum.value?.update(it) }!! > 0) {
                 setResult(101)
-                Toast.makeText(applicationContext, R.string.changeSuccessful, Toast.LENGTH_SHORT).show()
+                Toast.makeText(MemorandumKotlinApplication.context, R.string.changeSuccessful, Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(applicationContext, R.string.changeFailed, Toast.LENGTH_SHORT).show()
+                Toast.makeText(MemorandumKotlinApplication.context, R.string.changeFailed, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -162,13 +173,18 @@ class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
             setMessage(R.string.delete_confirm)
             setPositiveButton(R.string.ok) { _, _ ->
 
-                val result = LitePal.delete(Memorandum::class.java, memorandum.id)
-                if (result > 0) {
+                val result =
+                    viewModel.memorandum.value?.id?.let {
+                        LitePal.delete(Memorandum::class.java,
+                            it
+                        )
+                    }
+                if (result ?: 0 > 0) {
                     setResult(101)
-                    Toast.makeText(applicationContext, R.string.deleteSuccessful, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(MemorandumKotlinApplication.context, R.string.deleteSuccessful, Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
-                    Toast.makeText(applicationContext, R.string.deleteFailed, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(MemorandumKotlinApplication.context, R.string.deleteFailed, Toast.LENGTH_SHORT).show()
                 }
             }
             setNegativeButton(R.string.cancel, null)
@@ -179,14 +195,14 @@ class EditMemorandumActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun addMemorandum() {
         if (validate()){
-            memorandum = Memorandum(edtTitle.text.toString(), edtContent.text.toString())
+            viewModel.memorandum.value = Memorandum(edtTitle.text.toString(), edtContent.text.toString())
 
-            if (memorandum.save()) {
+            if (viewModel.memorandum.value?.save()!!) {
                 setResult(101)
-                Toast.makeText(applicationContext, R.string.saveSuccessful, Toast.LENGTH_SHORT).show()
+                Toast.makeText(MemorandumKotlinApplication.context, R.string.saveSuccessful, Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(applicationContext, R.string.saveFailed, Toast.LENGTH_SHORT).show()
+                Toast.makeText(MemorandumKotlinApplication.context, R.string.saveFailed, Toast.LENGTH_SHORT).show()
             }
         }
     }

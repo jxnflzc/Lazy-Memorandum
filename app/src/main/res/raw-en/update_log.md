@@ -1,3 +1,8 @@
+### 2020/06/20 Version 1.1.0
+
+* Modify some code logic
+* Refactoring with ViewModel
+
 ### 2020/06/20 Version 1.0.11
 
 * Optimize the display of update log to avoid the text at the bottom being blocked

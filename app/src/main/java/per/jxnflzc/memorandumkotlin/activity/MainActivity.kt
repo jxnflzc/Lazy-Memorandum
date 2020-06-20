@@ -11,20 +11,26 @@ import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.litepal.LitePal
 import per.jxnflzc.memorandumkotlin.ActivityCollector
+import per.jxnflzc.memorandumkotlin.BaseActivity
+import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication
 import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.activity.menu.AboutActivity
 import per.jxnflzc.memorandumkotlin.activity.menu.UpdateActivity
 import per.jxnflzc.memorandumkotlin.adapter.MemorandumAdapter
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
+import per.jxnflzc.memorandumkotlin.util.LogUtil
 import per.jxnflzc.memorandumkotlin.util.UpdateUtil
+import per.jxnflzc.memorandumkotlin.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity() {
-    private var memorandumList = ArrayList<Memorandum>()
+class MainActivity : BaseActivity() {
+    private lateinit var viewModel: MainViewModel
 
     companion object {
         fun activityStart(context: Context) {
@@ -42,7 +48,9 @@ class MainActivity : AppCompatActivity() {
 
         UpdateUtil.checkUpdate(this, UpdateUtil.NOTIFICATION)
 
-        initMemorandumList()
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        viewModel.initMemorandum()
         showMemorandumList()
 
         btnAdd.setOnClickListener{
@@ -50,23 +58,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
             101-> {//1：memorandumList可能会改变，对应requestCode = 1，01：memorandumList发生改变
-                Log.d("MainActivity", "initMemorandumList")
-                initMemorandumList()
+                LogUtil.d("MainActivity", "initMemorandumList")
+                viewModel.initMemorandum()
                 showMemorandumList()
             }
         }
-    }
-
-    //生命周期Destroy
-    override fun onDestroy() {
-        super.onDestroy()
-        ActivityCollector.removeActivity(this)
     }
 
     //创建菜单
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String): Boolean {
-                initSearchMemorandumList(query)
+                viewModel.searchMemorandum(query)
                 showMemorandumList()
                 searchView.clearFocus()
                 return false;
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
         searchView.setOnCloseListener {
-            initMemorandumList()
+            viewModel.initMemorandum()
             showMemorandumList()
             searchView.clearFocus()
 
@@ -107,25 +107,11 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    //初始化备忘录列表
-    private fun initMemorandumList() {
-        memorandumList.clear()//清空所有内容
-
-        memorandumList = LitePal.order("date desc").find(Memorandum::class.java) as ArrayList<Memorandum>
-    }
-
-    //初始化搜索出的备忘录列表
-    private fun initSearchMemorandumList(query: String) {
-        memorandumList.clear()//清空所有内容
-
-        memorandumList = LitePal.where("title like ? or content like ?", "%$query%", "%$query%").order("date desc").find(Memorandum::class.java) as ArrayList<Memorandum>
-    }
-
     //显示备忘录列表
     private fun showMemorandumList() {
         val layoutManager = LinearLayoutManager(this)
         listMemorandum.layoutManager = layoutManager
-        val adapter = MemorandumAdapter(memorandumList)
+        val adapter = MemorandumAdapter(viewModel.memorandumList.value ?: ArrayList<Memorandum>())
         val context = this
 
         adapter.setOnRemoveListener(object: MemorandumAdapter.OnRemoveListener {
@@ -134,13 +120,13 @@ class MainActivity : AppCompatActivity() {
                     setTitle(R.string.delete)
                     setMessage(R.string.delete_confirm)
                     setPositiveButton(R.string.ok) { _, _ ->
-                        val result = LitePal.delete(Memorandum::class.java, memorandumList[position].id)
+                        val result = viewModel.delete(position)
                         if (result > 0) {
-                            memorandumList.removeAt(position)
+                            viewModel.remove(position)
                             adapter.notifyDataSetChanged()
-                            Toast.makeText(applicationContext, R.string.deleteSuccessful, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(MemorandumKotlinApplication.context, R.string.deleteSuccessful, Toast.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(applicationContext, R.string.deleteFailed, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(MemorandumKotlinApplication.context, R.string.deleteFailed, Toast.LENGTH_SHORT).show()
                         }
                     }
                     setNegativeButton(R.string.cancel, null)

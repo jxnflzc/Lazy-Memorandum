@@ -16,11 +16,12 @@ import okio.Okio
 import okio.buffer
 import okio.source
 import per.jxnflzc.memorandumkotlin.ActivityCollector
+import per.jxnflzc.memorandumkotlin.BaseActivity
 import per.jxnflzc.memorandumkotlin.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class UpdateActivity : AppCompatActivity() {
+class UpdateActivity : BaseActivity() {
     companion object {
         fun activityStart(context: Context) {
             val intent = Intent(context, UpdateActivity::class.java).apply {   }
@@ -31,7 +32,6 @@ class UpdateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update)
-        ActivityCollector.addActivity(this)
 
         initUpdateInfo()
     }
@@ -46,11 +46,5 @@ class UpdateActivity : AppCompatActivity() {
             })
             .build()
         markdown.setMarkdown(txtUpdate, sb)
-        //txtUpdate.text = Html.fromHtml(sb, Html.FROM_HTML_MODE_LEGACY)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        ActivityCollector.removeActivity(this)
     }
 }

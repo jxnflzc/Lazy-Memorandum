@@ -1,8 +1,8 @@
 ## Lazy Memorandum
 
 Lazy Memorandum, a simple memorandum.<br/>
-![Version](https://img.shields.io/badge/Version-1.0.10-brightgreen.svg)<br/>
-![License](https://img.shields.io/badge/License-GPLv3.0-blue)
+[![Version](https://img.shields.io/badge/Version-1.0.11-brightgreen.svg)](https://github.com/jxnflzc/Lazy-Memorandum)<br/>
+[![License](https://img.shields.io/badge/License-GPLv3.0-blue)](https://github.com/jxnflzc/Lazy-Memorandum/blob/master/LICENSE)
 
 ## Some Dependencies
 
@@ -14,6 +14,11 @@ Lazy Memorandum, a simple memorandum.<br/>
 [![AndroidAboutPage](https://img.shields.io/badge/AndroidAboutPage-1.2.6-blueviolet)](https://github.com/medyo/android-about-page)
 
 ## Update Log
+
+### 2020/06/20 Version 1.1.0
+
+* Modify some code logic
+* Refactoring with ViewModel
 
 ### 2020/06/20 Version 1.0.11
 

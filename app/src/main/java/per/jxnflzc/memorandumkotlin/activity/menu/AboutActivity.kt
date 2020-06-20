@@ -13,6 +13,7 @@ import mehdi.sakout.aboutpage.AboutPage
 import mehdi.sakout.aboutpage.Element
 import okhttp3.*
 import per.jxnflzc.memorandumkotlin.ActivityCollector
+import per.jxnflzc.memorandumkotlin.BaseActivity
 import per.jxnflzc.memorandumkotlin.BuildConfig
 import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.util.UpdateUtil
@@ -20,7 +21,7 @@ import per.jxnflzc.memorandumkotlin.util.UriUtil
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : BaseActivity() {
     companion object {
         fun activityStart(context: Context) {
             val intent = Intent(context, AboutActivity::class.java).apply {   }
@@ -31,7 +32,6 @@ class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        ActivityCollector.addActivity(this)
 
         val aboutPage = AboutPage(this)
             .isRTL(false)
@@ -47,10 +47,5 @@ class AboutActivity : AppCompatActivity() {
             .addGitHub("jxnflzc/Lazy-Memorandum")
             .create()
         setContentView(aboutPage)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        ActivityCollector.removeActivity(this)
     }
 }
