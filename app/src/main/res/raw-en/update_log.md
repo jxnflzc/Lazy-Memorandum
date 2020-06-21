@@ -1,3 +1,8 @@
+### 2020/06/21 Version 1.2.1
+
+* New classification function of notes
+* Classification function basic part completed
+
 ### 2020/06/20 Version 1.2.0
 
 * New classification function of notes

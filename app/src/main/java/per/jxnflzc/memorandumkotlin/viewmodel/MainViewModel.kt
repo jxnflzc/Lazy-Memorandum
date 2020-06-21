@@ -3,6 +3,8 @@ package per.jxnflzc.memorandumkotlin.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication
+import per.jxnflzc.memorandumkotlin.R
 import per.jxnflzc.memorandumkotlin.model.Catalog
 import per.jxnflzc.memorandumkotlin.model.Memorandum
 import per.jxnflzc.memorandumkotlin.service.impl.CatalogServiceImpl
@@ -47,9 +49,9 @@ class MainViewModel() : ViewModel() {
         memorandumList.value?.removeAt(position)
     }
 
-    private fun initCatalog() {
+    fun initCatalog() {
         catalogList.value = catalogService.getAllCatalog()
-        val all = Catalog("全部")
+        val all = Catalog(MemorandumKotlinApplication.context.getString(R.string.all))
         all.id = 0
         catalogList.value?.add(0, all)
     }

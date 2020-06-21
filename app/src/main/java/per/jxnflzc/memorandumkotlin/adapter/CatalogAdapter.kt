@@ -4,15 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication
 import per.jxnflzc.memorandumkotlin.R
-import per.jxnflzc.memorandumkotlin.activity.EditMemorandumActivity
-import per.jxnflzc.memorandumkotlin.extend.*
+import per.jxnflzc.memorandumkotlin.activity.edit.EditCatalogActivity
+import per.jxnflzc.memorandumkotlin.activity.edit.EditMemorandumActivity
 import per.jxnflzc.memorandumkotlin.model.Catalog
 import per.jxnflzc.memorandumkotlin.model.EditType
-import per.jxnflzc.memorandumkotlin.model.Memorandum
 
 class CatalogAdapter(private val catalogList: ArrayList<Catalog>) :
         RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
@@ -27,6 +24,13 @@ class CatalogAdapter(private val catalogList: ArrayList<Catalog>) :
         viewHolder.itemView.setOnClickListener {
             val position = viewHolder.adapterPosition
             onSearchListener.onSearch(catalogList[position].id)
+        }
+        viewHolder.itemView.setOnLongClickListener {
+            val position = viewHolder.adapterPosition
+            if (catalogList[position].id != 0L) {
+                EditCatalogActivity.activityStart(parent.context, EditType.EDIT, catalogList[position], 2)
+            }
+            true
         }
         return viewHolder
     }

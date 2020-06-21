@@ -1,4 +1,4 @@
-package per.jxnflzc.memorandumkotlin.activity
+package per.jxnflzc.memorandumkotlin.activity.edit
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,26 +8,29 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_edit_memorandum.*
+import org.jetbrains.anko.spinner
 import per.jxnflzc.memorandumkotlin.ActivityCollector
 import per.jxnflzc.memorandumkotlin.BaseActivity
 import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication
 import per.jxnflzc.memorandumkotlin.R
+import per.jxnflzc.memorandumkotlin.adapter.CatalogSpinnerAdapter
 import per.jxnflzc.memorandumkotlin.extend.toSimpleString
-import per.jxnflzc.memorandumkotlin.factory.EditViewModelFactory
+import per.jxnflzc.memorandumkotlin.factory.EditMemorandumViewModelFactory
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
-import per.jxnflzc.memorandumkotlin.viewmodel.EditViewModel
+import per.jxnflzc.memorandumkotlin.viewmodel.edit.EditMemorandumViewModel
 import kotlin.properties.Delegates
 
 class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
     private var type = EditType.ADD//编辑页面的类型，默认为ADD（添加）
     private val maxNum = 50000//笔记内容的最大字数
-    private lateinit var viewModel: EditViewModel
+    private lateinit var viewModel: EditMemorandumViewModel
 
     companion object {
         fun activityStart(context: Context, type: EditType, memorandum: Memorandum = Memorandum(), requestCode: Int = 0) {
@@ -56,10 +59,13 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
         val bundle = intent.extras
         type = bundle?.getSerializable("type") as EditType
         val memorandum = bundle.getSerializable("memorandum") as Memorandum
-        viewModel = ViewModelProvider(this, EditViewModelFactory(memorandum)).get(EditViewModel::class.java)
+        viewModel = ViewModelProvider(this, EditMemorandumViewModelFactory(memorandum)).get(EditMemorandumViewModel::class.java)
         viewModel.memorandum.observe(this, Observer {
             showMemorandum(it)
         })
+
+        val catalogAdapter = CatalogSpinnerAdapter(this, viewModel.catalogList.value!!)
+        spinnerCatalog.adapter = catalogAdapter
 
         when (type) {
             EditType.EDIT -> {
@@ -79,6 +85,13 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
         if (txtDate.visibility == View.VISIBLE) {
             txtDate.text = memorandum.date.toSimpleString()
         }
+        var select = 0
+        for (i in 0 until viewModel.catalogList.value?.size!!) {
+            if (viewModel.catalogList.value?.get(i)?.id == memorandum.catalogId) {
+                select = i
+            }
+        }
+        spinnerCatalog.setSelection(select)
     }
 
     private fun initListener(){
@@ -113,6 +126,17 @@ class EditMemorandumActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         })
+
+        spinnerCatalog.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                viewModel.setMemorandumCatalog(viewModel.catalogList.value?.get(position)?.id!!)
+                //Toast.makeText(MemorandumKotlinApplication.context, "${viewModel.catalogList.value?.get(position)}", Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 
     override fun onClick(view: View?) {

@@ -27,6 +27,7 @@
     <string name="close">关闭</string>
     <string name="app_info">应用信息</string>
     <string name="delete_confirm">确认删除该笔记吗？</string>
+    <string name="delete_catalog_confirm">确认删除该分类吗？</string>
     <string name="find_update">发现更新</string>
     <string name="find_update_confirm">请前往下载更新</string>
     <string name="more_than_words">字数超过$d</string>
@@ -35,4 +36,7 @@
     <string name="historical_version">历史版本</string>
     <string name="no_catalog">未分类</string>
     <string name="catalog">类别</string>
+    <string name="catalog_name">类别名称</string>
+    <string name="catalog_name_hint">请输入类别名称</string>
+    <string name="all">全部</string>
 </resources>

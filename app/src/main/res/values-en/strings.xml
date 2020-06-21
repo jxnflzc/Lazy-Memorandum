@@ -27,6 +27,7 @@
     <string name="close">Close</string>
     <string name="app_info">App Information</string>
     <string name="delete_confirm">Are you sure you want to delete this note?</string>
+    <string name="delete_catalog_confirm">Are you sure you want to delete this catalog?</string>
     <string name="find_update">Discover updates</string>
     <string name="find_update_confirm">Please go to download the update</string>
     <string name="more_than_words">More than $d words</string>
@@ -35,4 +36,7 @@
     <string name="historical_version">Historical version</string>
     <string name="no_catalog">No catalog</string>
     <string name="catalog">Catalog</string>
+    <string name="catalog_name">Catalog name</string>
+    <string name="catalog_name_hint">Please enter the catalog name</string>
+    <string name="all">All</string>
 </resources>

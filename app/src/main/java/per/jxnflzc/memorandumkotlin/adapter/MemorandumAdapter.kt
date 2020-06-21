@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import per.jxnflzc.memorandumkotlin.R
-import per.jxnflzc.memorandumkotlin.activity.EditMemorandumActivity
+import per.jxnflzc.memorandumkotlin.activity.edit.EditMemorandumActivity
 import per.jxnflzc.memorandumkotlin.extend.*
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
@@ -40,6 +40,10 @@ class MemorandumAdapter(private val memorandumList: ArrayList<Memorandum>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val memorandum = memorandumList[position]
         val catalogService = CatalogServiceImpl()
+        val catalog = catalogService.getCatalog(memorandum.catalogId)
+        if (catalog.id == 0L) {
+            memorandum.catalogId = 1
+        }
         holder.txtCatalog.text = catalogService.getCatalog(memorandum.catalogId).name
         holder.txtDate.text = memorandum.date.showDateInfo()
         holder.txtTitle.text = memorandum.title

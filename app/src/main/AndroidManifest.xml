@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.edit.EditCatalogActivity"></activity>
         <activity
-            android:name=".activity.EditMemorandumActivity"
+            android:name=".activity.edit.EditMemorandumActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".activity.menu.AboutActivity"

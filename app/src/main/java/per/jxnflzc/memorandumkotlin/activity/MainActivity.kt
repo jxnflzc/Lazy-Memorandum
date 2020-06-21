@@ -15,11 +15,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.litepal.LitePal
-import per.jxnflzc.memorandumkotlin.ActivityCollector
 import per.jxnflzc.memorandumkotlin.BaseActivity
 import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication
 import per.jxnflzc.memorandumkotlin.MemorandumKotlinApplication.Companion.logger
 import per.jxnflzc.memorandumkotlin.R
+import per.jxnflzc.memorandumkotlin.activity.edit.EditCatalogActivity
+import per.jxnflzc.memorandumkotlin.activity.edit.EditMemorandumActivity
 import per.jxnflzc.memorandumkotlin.activity.menu.AboutActivity
 import per.jxnflzc.memorandumkotlin.activity.menu.UpdateActivity
 import per.jxnflzc.memorandumkotlin.adapter.CatalogAdapter
@@ -27,7 +28,6 @@ import per.jxnflzc.memorandumkotlin.adapter.MemorandumAdapter
 import per.jxnflzc.memorandumkotlin.model.Catalog
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
-import per.jxnflzc.memorandumkotlin.service.impl.CatalogServiceImpl
 import per.jxnflzc.memorandumkotlin.util.UpdateUtil
 import per.jxnflzc.memorandumkotlin.viewmodel.MainViewModel
 import java.util.*
@@ -56,6 +56,16 @@ class MainActivity : BaseActivity() {
 
         UpdateUtil.checkUpdate(this, UpdateUtil.NOTIFICATION)
 
+        //LitePal.deleteAll(Memorandum::class.java)
+        /*for (i in 1..3) {
+            val m = Memorandum()
+            m.title = "t $i"
+            m.content = "c $i"
+            m.date = Date()
+            m.catalogId = 2
+            m.save()
+        }*/
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.memorandumList.observe(this, Observer {
             showMemorandumList(it)
@@ -64,8 +74,11 @@ class MainActivity : BaseActivity() {
             showMCatalogList(it)
         })
 
-        btnAdd.setOnClickListener{
+        btnAddMemorandum.setOnClickListener{
             EditMemorandumActivity.activityStart(this, EditType.ADD, requestCode = 1)
+        }
+        btnAddCatalog.setOnClickListener {
+            EditCatalogActivity.activityStart(this, EditType.ADD, requestCode = 2)
         }
     }
 
@@ -75,6 +88,15 @@ class MainActivity : BaseActivity() {
             101-> {//1：memorandumList可能会改变，对应requestCode = 1，01：memorandumList发生改变
                 logger.d("MainActivity", "initMemorandumList")
                 viewModel.initMemorandum()
+            }
+            201-> {//2：catalogList可能会改变，对应requestCode = 1，01：catalogList发生改变
+                logger.d("MainActivity", "initCatalogList")
+                viewModel.initCatalog()
+            }
+            202-> {//2：catalogList和memorandumList可能会改变，对应requestCode = 2，01：catalogList和memorandumList发生改变
+                logger.d("MainActivity", "initMemorandumList & initCatalogList")
+                viewModel.initMemorandum()
+                viewModel.initCatalog()
             }
         }
     }

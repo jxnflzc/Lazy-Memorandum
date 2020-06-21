@@ -11,6 +11,21 @@ class CatalogServiceImpl : CatalogService {
     }
 
     override fun getCatalog(id: Long): Catalog {
-        return LitePal.find(Catalog::class.java, id)
+        return LitePal.find(Catalog::class.java, id) ?: Catalog()
+    }
+
+    override fun update(catalog: Catalog): Int {
+        return catalog.update(catalog.id)
+    }
+
+    override fun save(catalog: Catalog): Boolean {
+        return catalog.save()
+    }
+
+    override fun delete(id: Long): Int {
+        return LitePal.delete(
+            Catalog::class.java,
+            id
+        )
     }
 }
