@@ -1,5 +1,6 @@
 package per.jxnflzc.memorandumkotlin.viewmodel.edit
 
+import android.content.ContentValues
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.litepal.LitePal
@@ -45,13 +46,17 @@ class EditCatalogViewModel (catalog: Catalog) : ViewModel() {
             for (m in memorandumService.getMemorandumByCatalog(catalog.value?.id!!)) {
                 m.catalogId = 1
                 logger.d("EditCatalogViewModel", "\n$m")
-                result = result && (m.update(m.id) > 0)
+                val cv = ContentValues()
+                cv.put("catalogId", 1)
+                val update = LitePal.updateAll(Memorandum::class.java, cv, "id = ?", m.id.toString())
+                result = result && (update > 0)
                 logger.d("EditCatalogViewModel", "m's result $result")
             }
 
             logger.d("EditCatalogViewModel", "result ${num > 0}")
             result && (num > 0)
         }
+
         return num
     }
 }

@@ -41,10 +41,11 @@ class MemorandumAdapter(private val memorandumList: ArrayList<Memorandum>) :
         val memorandum = memorandumList[position]
         val catalogService = CatalogServiceImpl()
         val catalog = catalogService.getCatalog(memorandum.catalogId)
-        if (catalog.id == 0L) {
+        if (catalog  == null) {
             memorandum.catalogId = 1
+            memorandum.update(memorandum.id)
         }
-        holder.txtCatalog.text = catalogService.getCatalog(memorandum.catalogId).name
+        holder.txtCatalog.text = catalogService.getCatalog(memorandum.catalogId)?.name
         holder.txtDate.text = memorandum.date.showDateInfo()
         holder.txtTitle.text = memorandum.title
     }

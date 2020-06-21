@@ -1,5 +1,6 @@
 package per.jxnflzc.memorandumkotlin.service.impl
 
+import android.content.ContentValues
 import org.litepal.LitePal
 import per.jxnflzc.memorandumkotlin.extend.toIdString
 import per.jxnflzc.memorandumkotlin.model.Memorandum
@@ -26,7 +27,12 @@ class MemorandumServiceImpl: MemorandumService {
     }
 
     override fun update(memorandum: Memorandum): Int {
-        return memorandum.update(memorandum.id)
+        val cv = ContentValues()
+        cv.put("title", memorandum.title)
+        cv.put("date", memorandum.date.time)
+        cv.put("content", memorandum.content)
+        cv.put("catalogId", memorandum.catalogId)
+        return LitePal.update(Memorandum::class.java, cv, memorandum.id)
     }
 
     override fun save(memorandum: Memorandum): Boolean {

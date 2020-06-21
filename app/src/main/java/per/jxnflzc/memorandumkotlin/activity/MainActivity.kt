@@ -28,6 +28,7 @@ import per.jxnflzc.memorandumkotlin.adapter.MemorandumAdapter
 import per.jxnflzc.memorandumkotlin.model.Catalog
 import per.jxnflzc.memorandumkotlin.model.EditType
 import per.jxnflzc.memorandumkotlin.model.Memorandum
+import per.jxnflzc.memorandumkotlin.service.impl.MemorandumServiceImpl
 import per.jxnflzc.memorandumkotlin.util.UpdateUtil
 import per.jxnflzc.memorandumkotlin.viewmodel.MainViewModel
 import java.util.*
@@ -56,8 +57,8 @@ class MainActivity : BaseActivity() {
 
         UpdateUtil.checkUpdate(this, UpdateUtil.NOTIFICATION)
 
-        //LitePal.deleteAll(Memorandum::class.java)
-        /*for (i in 1..3) {
+        /*LitePal.deleteAll(Memorandum::class.java)
+        for (i in 1..3) {
             val m = Memorandum()
             m.title = "t $i"
             m.content = "c $i"
@@ -189,11 +190,13 @@ class MainActivity : BaseActivity() {
         listCatalog.layoutManager = layoutManager
         val adapter = CatalogAdapter(catalogList)
 
-
-
         adapter.setOnSearchListener(object: CatalogAdapter.OnSearchListener {
             override fun onSearch(catalogId: Long) {
                 viewModel.searchMemorandumByCatalogId(catalogId)
+
+                for (m in MemorandumServiceImpl().getAllMemorandum()) {
+                    logger.d("MainActivity", "$m")
+                }
             }
         })
 

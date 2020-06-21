@@ -45,6 +45,7 @@ class EditCatalogActivity : BaseActivity(), View.OnClickListener {
         val bundle = intent.extras
         type = bundle?.getSerializable("type") as EditType
         val catalog = bundle.getSerializable("catalog") as Catalog
+        Toast.makeText(this, "$catalog", Toast.LENGTH_SHORT).show()
         viewModel = ViewModelProvider(this, EditCatalogViewModelFactory(catalog)).get(EditCatalogViewModel::class.java)
         viewModel.catalog.observe(this, Observer {
             showCatalog(it)

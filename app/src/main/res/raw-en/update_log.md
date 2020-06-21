@@ -1,3 +1,8 @@
+### 2020/06/21 Version 1.2.3
+
+* Fix problems after deleting catalog
+* Fix a problem where the catalog could not be changed back to the default catalog
+
 ### 2020/06/21 Version 1.2.2
 
 * Fix wrong toast prompt in edit catalog page
