@@ -1,7 +1,7 @@
 ## Lazy Memorandum
 
 Lazy Memorandum, a simple memorandum.<br/>
-[![Version](https://img.shields.io/badge/Version-1.2.1-brightgreen.svg)](https://github.com/jxnflzc/Lazy-Memorandum)<br/>
+[![Version](https://img.shields.io/badge/Version-1.2.2-brightgreen.svg)](https://github.com/jxnflzc/Lazy-Memorandum)<br/>
 [![License](https://img.shields.io/badge/License-GPLv3.0-blue)](https://github.com/jxnflzc/Lazy-Memorandum/blob/master/LICENSE)
 
 ## Some Dependencies
@@ -24,6 +24,10 @@ Lazy Memorandum, a simple memorandum.<br/>
 <img src="https://i.loli.net/2020/06/20/qbvgRSaxTykmfct.png" alt="Screenshot_1592639377.png" title="Memorandum List" width="300px" /><img src="https://i.loli.net/2020/06/20/TSFYbgJj6nmsWvM.png" alt="Screenshot_1592639388.png" title="Edit Page" width="300px" /><img src="https://i.loli.net/2020/06/20/uzwbTj1hWx4VSne.png" alt="Screenshot_1592639393.png" title="About Page" width="300px" /><img src="https://i.loli.net/2020/06/20/rmdphFBK9Wz7bYZ.png" alt="Screenshot_1592639396.png" title="Update Log" width="300px" />
 
 ## Update Log
+
+### 2020/06/21 Version 1.2.2
+
+* Fix wrong toast prompt in edit catalog page
 
 ### 2020/06/21 Version 1.2.1
 

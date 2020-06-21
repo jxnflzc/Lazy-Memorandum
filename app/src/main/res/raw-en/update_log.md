@@ -1,3 +1,7 @@
+### 2020/06/21 Version 1.2.2
+
+* Fix wrong toast prompt in edit catalog page
+
 ### 2020/06/21 Version 1.2.1
 
 * New classification function of notes

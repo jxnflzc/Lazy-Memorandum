@@ -50,7 +50,6 @@ class EditCatalogActivity : BaseActivity(), View.OnClickListener {
             showCatalog(it)
         })
 
-        Toast.makeText(MemorandumKotlinApplication.context, "${catalog.id}", Toast.LENGTH_SHORT).show()
         initListener()
 
         when (type) {
